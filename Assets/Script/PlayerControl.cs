@@ -13,11 +13,14 @@ public class PlayerControl : MonoBehaviour
     private GroundSensor _groundSensor;
     private SpriteRenderer _spriteRender;
     public float jumpforce = 10;
+
+    private Animator _animator;
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         _groundSensor = GetComponentInChildren<GroundSensor>();
         _spriteRender = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -39,6 +42,13 @@ public class PlayerControl : MonoBehaviour
 
       Movement();
 
+    _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
+
+      /*if(_groundSensor.isGrounded)
+      {
+        _animator.SetBool("IsJumping", false);
+      }*/
+
         //transform.position = new Vector3(transform.position.x + direction * playerSpeed * Time.deltaTime, transform.position.y, transform.position.z) ;
         //transform.Translate(new Vector3(direction * playerSpeed * Time.deltaTime, 0, 0));
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
@@ -56,15 +66,22 @@ public class PlayerControl : MonoBehaviour
         if(inputHorizontal > 0)
         {
             _spriteRender.flipX = false;
+            _animator.SetBool("IsRunning", true);
         }
         else if(inputHorizontal < 0)
         {
             _spriteRender.flipX = true;
+            _animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("IsRunning", false);
         }
     }
 
     void Jump()
     {
     rigidBody.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse); //hacer que salte
+    //_animator.SetBool("IsJumping", true);
     }
 }
