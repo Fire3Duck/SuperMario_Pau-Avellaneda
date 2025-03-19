@@ -11,11 +11,13 @@ public class PlayerControl : MonoBehaviour
     
     public Rigidbody2D rigidBody;
     private GroundSensor _groundSensor;
+    private SpriteRenderer _spriteRender;
     public float jumpforce = 10;
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         _groundSensor = GetComponentInChildren<GroundSensor>();
+        _spriteRender = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -32,8 +34,10 @@ public class PlayerControl : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true) //GetButton tiene 3 formas (El Down que hace la accion cuando pulsa el boton, el Up que hace la acicon cuando sueltas el boton y el GetButton que hace manteniendo el boton)
         {
-            rigidBody.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse); //hacer que salte
+            Jump();
         }
+
+      Movement();
 
         //transform.position = new Vector3(transform.position.x + direction * playerSpeed * Time.deltaTime, transform.position.y, transform.position.z) ;
         //transform.Translate(new Vector3(direction * playerSpeed * Time.deltaTime, 0, 0));
@@ -45,5 +49,22 @@ public class PlayerControl : MonoBehaviour
         rigidBody.velocity = new Vector2(inputHorizontal * playerSpeed, rigidBody.velocity.y);
         //rigidBody.AddForce(new Vector2(inputHorizontal, 0));
         //rigidBody.MovePosition(new Vector2(100, 0));
+    }
+
+    void Movement ()
+    {
+        if(inputHorizontal > 0)
+        {
+            _spriteRender.flipX = false;
+        }
+        else if(inputHorizontal < 0)
+        {
+            _spriteRender.flipX = true;
+        }
+    }
+
+    void Jump()
+    {
+    rigidBody.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse); //hacer que salte
     }
 }
