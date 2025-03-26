@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = 0;
     }
 
     // Update is called once per frame
@@ -51,11 +51,25 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D Collision) 
     {
-        direction *= -1;
-
+        if(Collision.gameObject.CompareTag("Tuberia") || Collision.gameObject.layer == 6)
+        {
+          direction *= -1;  
+        }
+        
         if(Collision.gameObject.CompareTag("Player"))
         {
-            Destroy(Collision.gameObject);
+            //Destroy(Collision.gameObject);
+            PlayerControl playerScript = Collision.gameObject.GetComponent<PlayerControl>();
+            playerScript.Death();
         }
+    }
+
+    private void OnBecameVisible()
+    {
+        speed = 5;
+    }
+    private void OnBecameInvisible()
+    {
+        speed = 0;
     }
 }

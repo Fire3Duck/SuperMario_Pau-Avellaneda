@@ -12,13 +12,17 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D rigidBody;
     private GroundSensor _groundSensor;
     private SpriteRenderer _spriteRender;
-    public float jumpforce = 10;
+    public float jumpForce = 10;
 
     private Animator _animator;
 
     private AudioSource _audioSource;
+    private BoxCollider2D _boxCollider;
+    private GameManager _gameManager;
+    private SoundManager _soundManager;
 
     public AudioClip jumpSFX;
+    public AudioClip deathSFX;
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -26,6 +30,9 @@ public class PlayerControl : MonoBehaviour
         _spriteRender = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
     }
 
     // Start is called before the first frame update
@@ -38,6 +45,16 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update() //para los botones 
     {
+        if(!_gameManager.isPlaying)
+        {
+            return;
+        }
+
+        if(_gameManager._isPaused)
+        {
+            return;
+        }
+    
         inputHorizontal = Input.GetAxisRaw("Horizontal"); //Aqui hacemos que el personaje se mueva cuando pulsamos un boton.
 
         if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true) //GetButton tiene 3 formas (El Down que hace la accion cuando pulsa el boton, el Up que hace la acicon cuando sueltas el boton y el GetButton que hace manteniendo el boton)
@@ -86,8 +103,32 @@ public class PlayerControl : MonoBehaviour
 
     void Jump()
     {
-    rigidBody.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse); //hacer que salte
+    rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //hacer que salte
     _animator.SetBool("IsJumping", true);
     _audioSource.PlayOneShot(jumpSFX);
+    }
+
+    public void Death()
+    {
+        _animator.SetTrigger("IsDead");
+        _audioSource.PlayOneShot(deathSFX);
+        _boxCollider.enabled = false;
+
+        Destroy(_groundSensor.gameObject);
+        inputHorizontal = 0;
+        rigidBody.velocity = Vector2.zero;
+        
+        rigidBody.AddForce(Vector2.up * jumpForce / 2, ForceMode2D.Impulse);
+        
+        _gameManager.isPlaying = false;
+
+        
+
+        StartCoroutine(_soundManager.DeathBGM());
+        //_soundManager.StartCoroutine("DeathBGM");
+
+        //_soundManager.Invoke("DeathBGM", deathSFX.lenght);
+
+        
     }
 }
