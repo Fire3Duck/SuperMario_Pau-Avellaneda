@@ -13,6 +13,12 @@ public class PlayerControl : MonoBehaviour
     private GroundSensor _groundSensor;
     private SpriteRenderer _spriteRender;
     public float jumpForce = 10;
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+
+    public bool canShoot = false;
+    public float powerUpDuration = 10f;
+    public float powerUpTimer;
 
     private Animator _animator;
 
@@ -23,6 +29,9 @@ public class PlayerControl : MonoBehaviour
 
     public AudioClip jumpSFX;
     public AudioClip deathSFX;
+    public AudioClip shootSFX;
+
+
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -62,6 +71,16 @@ public class PlayerControl : MonoBehaviour
             Jump();
         }
 
+        if(Input.GetButtonDown("Fire1") && canShoot)
+        {
+            Shoot();
+        }
+        if(canShoot)
+        {
+           PowerUp(); 
+        }
+        
+
       Movement();
 
     _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
@@ -87,12 +106,12 @@ public class PlayerControl : MonoBehaviour
     {
         if(inputHorizontal > 0)
         {
-            _spriteRender.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             _animator.SetBool("IsRunning", true);
         }
         else if(inputHorizontal < 0)
         {
-            _spriteRender.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             _animator.SetBool("IsRunning", true);
         }
         else
@@ -131,4 +150,22 @@ public class PlayerControl : MonoBehaviour
 
         
     }
+
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        _audioSource.PlayOneShot(shootSFX);
+    }
+
+    void PowerUp()
+    {
+        powerUpTimer += Time.deltaTime;
+
+        if(powerUpTimer >= powerUpDuration)
+        {
+            canShoot = false;
+            powerUpTimer = 0;
+        }
+    }
+
 }

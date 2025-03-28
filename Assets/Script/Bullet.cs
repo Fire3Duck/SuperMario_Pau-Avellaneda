@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     public float bulletForce = 10;
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rigidBody.AddForce(Vector2.right * bulletForce, ForceMode2D.Impulse);
+        _rigidBody.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider) 

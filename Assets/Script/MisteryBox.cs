@@ -10,6 +10,9 @@ public class MisteryBox : MonoBehaviour
     public AudioClip _misteryBoxSFX2;
 
     private bool _isOpen = false;
+    public GameObject ChampiñonPrefab;
+    public Transform ChampiñonSpawn;
+
 
     void Awake()
     {
@@ -25,7 +28,7 @@ public class MisteryBox : MonoBehaviour
 
             _audioSource.volume = 1;
             _audioSource.clip = _misteryBoxSFX;
-
+            ChampiñonOut();
             _isOpen = true;
         }
         else
@@ -44,6 +47,12 @@ public class MisteryBox : MonoBehaviour
         if(collider.gameObject.CompareTag("Player"))
         {
             ActivateBox();
+            
         }
+    }
+
+    void ChampiñonOut()
+    {
+        Instantiate(ChampiñonPrefab, ChampiñonSpawn.position, ChampiñonSpawn.rotation);
     }
 }
