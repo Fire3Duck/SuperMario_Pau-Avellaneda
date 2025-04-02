@@ -14,11 +14,14 @@ public class SoundManager : MonoBehaviour
     public float delay = 2;
     public float timer;
     private bool timerFinished = false;
+
+    private Bandera _bandera;
     
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        _bandera = FindObjectOfType<Bandera>().GetComponent<Bandera>();
     }
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,14 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
+
+    public void VictoryBGM()
+    {
+        if(_bandera.Victory)
+        {
+            _audioSource.Stop();
+        }
+    }
     public void PauseBGM()
     {
         if(_gameManager._isPaused)

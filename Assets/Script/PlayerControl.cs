@@ -167,5 +167,9 @@ public class PlayerControl : MonoBehaviour
             powerUpTimer = 0;
         }
     }
-
+    
+    void Coins()
+    {
+        
+    }
 }
