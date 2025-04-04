@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -11,17 +12,18 @@ public class SoundManager : MonoBehaviour
     public AudioClip bgm;
     public AudioClip gameOver;
 
+    public AudioClip victory;
+
     public float delay = 2;
     public float timer;
     private bool timerFinished = false;
 
-    private Bandera _bandera;
     
     void Awake()
     {
+        victory = GetComponent<AudioClip>();
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        _bandera = FindObjectOfType<Bandera>().GetComponent<Bandera>();
     }
     // Start is called before the first frame update
     void Start()
@@ -46,15 +48,7 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-
-    public void VictoryBGM()
-    {
-        if(_bandera.Victory)
-        {
-            _audioSource.Stop();
-        }
-    }
-    public void PauseBGM()
+        public void PauseBGM()
     {
         if(_gameManager._isPaused)
         {
@@ -88,5 +82,10 @@ public class SoundManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         
         _audioSource.PlayOneShot(gameOver);
+    }
+
+    public void StopMusic()
+    {
+        _audioSource.Stop();
     }
 }
