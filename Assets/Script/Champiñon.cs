@@ -54,6 +54,7 @@ public class Champiñon : MonoBehaviour
             //Destroy(Collision.gameObject);
             PlayerControl playerScript = Collision.gameObject.GetComponent<PlayerControl>();
             playerScript.canShoot = true;
+            playerScript.powerUpTimer = 0;
             Death();
         }
     }
