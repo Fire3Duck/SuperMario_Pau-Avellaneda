@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         coinsText.text = "Coins: " + coins.ToString();
+        goombaText.text = "Goombas: " + goombas.ToString();
     }
     void Update()
     {
