@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     public AudioClip _deathSFX;
     private BoxCollider2D _boxCollider;
 
+    public GameManager _gameManager;
+
     public float maxHealth;
     private float currentHealth;
 
@@ -26,6 +28,7 @@ public class Enemy : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _healthBar = GetComponentInChildren<Slider>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Start is called before the first frame update
@@ -51,6 +54,9 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
+
+        _gameManager.AddGombas();
+
         direction = 0;
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("IsDeath");

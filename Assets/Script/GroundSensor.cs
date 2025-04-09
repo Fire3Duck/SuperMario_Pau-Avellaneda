@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class GroundSensor : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class GroundSensor : MonoBehaviour
     private  Rigidbody2D _rigidBody;
 
     public float jumpDamage = 5;
+    private PlayerControl playerScript;
 
    void Awake()
    {
       _rigidBody = GetComponentInParent<Rigidbody2D>();
+
+     playerScript = GetComponentInParent<PlayerControl>();
    }
 
    void OnTriggerEnter2D(Collider2D collider) 
@@ -29,6 +33,10 @@ public class GroundSensor : MonoBehaviour
          _rigidBody.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
          Enemy _enemyScript = collider.gameObject.GetComponent<Enemy>();
          _enemyScript.TakeDamage(jumpDamage);
+      }
+      else if (collider.gameObject.layer == 10)
+      {
+         playerScript.Death();
       }
    }
 

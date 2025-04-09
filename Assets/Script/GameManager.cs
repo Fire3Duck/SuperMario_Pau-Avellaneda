@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public Text coinsText;
 
     private int coins = 0; 
+
+    public Text goombaText;
+
+    private int goombas = 0;
     void Awake()
     {
         _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
@@ -61,4 +65,10 @@ public class GameManager : MonoBehaviour
         coinsText.text = "Coins: " + coins.ToString();
         //para que cuente monedas de uno en uno.
     } 
+
+    public void AddGombas()
+    {
+        goombas++;
+        goombaText.text = "Goombas: " + goombas.ToString();
+    }
 }
