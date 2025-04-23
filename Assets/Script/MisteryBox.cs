@@ -10,7 +10,8 @@ public class MisteryBox : MonoBehaviour
     public AudioClip _misteryBoxSFX2;
 
     private bool _isOpen = false;
-    public GameObject ChampiñonPrefab;
+    public GameObject[] ChampiñonPrefab;
+    public int powerUpIndex;
     public Transform ChampiñonSpawn;
 
 
@@ -53,6 +54,6 @@ public class MisteryBox : MonoBehaviour
 
     void ChampiñonOut()
     {
-        Instantiate(ChampiñonPrefab, ChampiñonSpawn.position, ChampiñonSpawn.rotation);
+        Instantiate(ChampiñonPrefab[powerUpIndex], ChampiñonSpawn.position, ChampiñonSpawn.rotation);
     }
 }

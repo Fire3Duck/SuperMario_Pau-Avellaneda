@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public Text goombaText;
 
     private int goombas = 0;
+
+    public List<GameObject> enemiesInScreen;
+
     void Awake()
     {
         _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
@@ -32,7 +35,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(Input.GetButtonDown("Pause"))
-        Pause();
+        {
+            Pause();
+        }
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            foreach(GameObject enemy in enemiesInScreen)
+            {
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                enemyScript.Death();
+            }
+        }
     }
 
     public void MainMenu()

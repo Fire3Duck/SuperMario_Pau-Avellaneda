@@ -307,7 +307,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.35, y: -0.33, z: 4.2915926}
-  m_LocalScale: {x: 6.91487, y: 6.91487, z: 6.91487}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1645424190735145530}
@@ -548,6 +548,7 @@ MonoBehaviour:
   direction: 1
   speed: 5
   _deathSFX: {fileID: 8300000, guid: 66866104b59bd44459dd39b420aa5028, type: 3}
+  _gameManager: {fileID: 0}
   maxHealth: 5
 --- !u!95 &3471473381207696547
 Animator:

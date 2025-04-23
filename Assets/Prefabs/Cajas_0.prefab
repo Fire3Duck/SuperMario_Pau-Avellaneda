@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4813638848600123668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 0.62, z: 0.011185184}
+  m_LocalPosition: {x: -0.04, y: 0.82, z: 0.011185184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -342,5 +342,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _misteryBoxSFX: {fileID: 8300000, guid: 4fe60808d9ce3bc4aa03fa1954ea0e3c, type: 3}
   _misteryBoxSFX2: {fileID: 8300000, guid: c4e9eba23ff52b04aaaa08efc52c6e8d, type: 3}
-  "Champi\xF1onPrefab": {fileID: 7602288943323532946, guid: 49f6590821551eb4dbb1eb311e27b45b, type: 3}
+  "Champi\xF1onPrefab":
+  - {fileID: 5295413679151765782, guid: 2fbcf3c171dfb164db09e91ffa84d363, type: 3}
+  - {fileID: 7602288943323532946, guid: 49f6590821551eb4dbb1eb311e27b45b, type: 3}
+  - {fileID: 8287201114239685702, guid: 16aeef97e4f72ff4399e5a845cdfd7a1, type: 3}
+  powerUpIndex: 0
   "Champi\xF1onSpawn": {fileID: 7909693401236035896}
