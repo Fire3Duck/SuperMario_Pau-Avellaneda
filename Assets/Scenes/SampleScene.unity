@@ -55141,6 +55141,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 43651452}
   coinsText: {fileID: 1268400855}
   goombaText: {fileID: 1765033055}
+  enemiesInScreen: []
 --- !u!4 &2053435090
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 813604765563003743}
   - component: {fileID: 2963081649982257673}
   - component: {fileID: 2069307324231846046}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +91,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
+  jumpDamage: 5
+--- !u!1 &5236940054738436540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5824276207405264598}
+  m_Layer: 0
+  m_Name: Bullet Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5824276207405264598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236940054738436540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.103, y: 0.064, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7197927681776077731}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6111159323682466752
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +138,7 @@ GameObject:
   - component: {fileID: 4002720981666016728}
   - component: {fileID: 2639828473001250393}
   - component: {fileID: 5962919069210945185}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mario_0
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -127,6 +159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 813604765563003743}
+  - {fileID: 5824276207405264598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3660472396792518450
@@ -269,8 +302,15 @@ MonoBehaviour:
   direction: 1
   rigidBody: {fileID: 0}
   jumpForce: 12
+  bulletSpawn: {fileID: 5824276207405264598}
+  bulletPrefab: {fileID: 6259983758514498738, guid: 1e762e8c04ed6534f8b97c51a3f7326d, type: 3}
+  canShoot: 0
+  powerUpDuration: 10
+  powerUpTimer: 0
+  powerUpImage: {fileID: 0}
   jumpSFX: {fileID: 8300000, guid: d9a0c041d8093d941ac62226a6cdb791, type: 3}
   deathSFX: {fileID: 8300000, guid: a71176f3ba1f55b459394a7d49c036c9, type: 3}
+  shootSFX: {fileID: 8300000, guid: 7392ed7576992fa45aea8d4857cc3090, type: 3}
 --- !u!95 &2639828473001250393
 Animator:
   serializedVersion: 5
