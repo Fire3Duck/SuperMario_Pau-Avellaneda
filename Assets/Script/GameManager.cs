@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void AddCoins()
     {
-        coins++; 
+        coins++;
         coinsText.text = "Coins: " + coins.ToString();
         //para que cuente monedas de uno en uno.
     } 
